@@ -17,7 +17,7 @@ Project scope installs Arbityr into the current repo so your agent can discover 
 Pin a known release:
 
 ```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --pin v0.1.2 --scope project
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --pin v0.1.3 --scope project
 ```
 
 Install globally:
@@ -130,7 +130,7 @@ gh skill publish --dry-run
 Publish a release:
 
 ```sh
-gh skill publish --tag v0.1.2
+gh skill publish --tag v0.1.3
 ```
 
 ## What To Test
@@ -158,7 +158,8 @@ Arbityr runs a short decision session and ends with a decision spec:
 ## Decision Spec
 
 **Decision:** ...
-**Standing on:** ...
+**Why:** ...
+**Load-bearing assumption:** ...
 **Challenge:** ...
 **Held / Changed:** ...
 **This decision was wrong if:** ...
@@ -167,7 +168,7 @@ Arbityr runs a short decision session and ends with a decision spec:
 ## Discoverability Checklist
 
 - GitHub topics: `agent-skills`, `ai-skill`, `claude-skills`, `cursor`
-- GitHub skill release: `v0.1.2`
+- GitHub skill release: `v0.1.3`
 - Public catalogs: submit after more field usage
 
 ## Privacy
