@@ -9,7 +9,7 @@ Use it before you ask an AI agent to build something non-trivial, so you can def
 Arbityr is published as a GitHub Agent Skill:
 
 ```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --scope project
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope project
 ```
 
 Project scope installs Arbityr into the current repo so your agent can discover it there.
@@ -17,13 +17,13 @@ Project scope installs Arbityr into the current repo so your agent can discover 
 Pin a known release:
 
 ```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --pin v0.1.1 --scope project
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --pin v0.1.2 --scope project
 ```
 
 Install globally:
 
 ```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --scope user
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope user
 ```
 
 ## Agent-Specific Installs
@@ -47,9 +47,9 @@ Ask your coding agent:
 Install Arbityr for this repo.
 
 Use GitHub Agent Skills if available:
-gh skill install anshulLuhsna/arbityr-skill arbityr --scope project
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope project
 
-Pick the right --agent value for the current environment: codex, cursor, claude-code, opencode, or universal.
+If the current agent is known, replace universal with the right --agent value: codex, cursor, claude-code, or opencode.
 
 If gh skill is unavailable, install manually by copying skills/arbityr to the agent's project-local skills directory, preferably .agents/skills/arbityr.
 ```
@@ -130,7 +130,7 @@ gh skill publish --dry-run
 Publish a release:
 
 ```sh
-gh skill publish --tag v0.1.1
+gh skill publish --tag v0.1.2
 ```
 
 ## What To Test
@@ -167,7 +167,7 @@ Arbityr runs a short decision session and ends with a decision spec:
 ## Discoverability Checklist
 
 - GitHub topics: `agent-skills`, `ai-skill`, `claude-skills`, `cursor`
-- GitHub skill release: `v0.1.1`
+- GitHub skill release: `v0.1.2`
 - Public catalogs: submit after more field usage
 
 ## Privacy

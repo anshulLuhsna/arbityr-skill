@@ -26,7 +26,7 @@ When asked to use Arbityr:
 
 When asked to install Arbityr into another repo:
 
-1. Prefer `gh skill install anshulLuhsna/arbityr-skill arbityr --scope project`.
+1. Prefer `gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope project`.
 2. Add `--agent codex`, `--agent cursor`, `--agent opencode`, or `--agent claude-code` when the current host is known.
 3. If `gh skill` is unavailable, copy `skills/arbityr` into the target repo's `.agents/skills/arbityr`.
 4. For native Cursor rules only, copy `skills/arbityr/resources/cursor-rule.mdc` to `.cursor/rules/arbityr.mdc`.
