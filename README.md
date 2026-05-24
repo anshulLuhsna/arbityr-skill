@@ -4,14 +4,65 @@ Arbityr is a decision checkpoint for developers building with AI.
 
 Use it before you ask an AI agent to build something non-trivial, so you can defend the decision before the code exists.
 
+## Install
+
+Arbityr is published as a GitHub Agent Skill:
+
+```sh
+gh skill install anshulLuhsna/arbityr-skill arbityr --scope project
+```
+
+Project scope installs Arbityr into the current repo so your agent can discover it there.
+
+Pin a known release:
+
+```sh
+gh skill install anshulLuhsna/arbityr-skill arbityr --pin v0.1.1 --scope project
+```
+
+Install globally:
+
+```sh
+gh skill install anshulLuhsna/arbityr-skill arbityr --scope user
+```
+
+## Agent-Specific Installs
+
+Use the same skill package and choose the agent host:
+
+```sh
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent codex --scope project
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent cursor --scope project
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent opencode --scope project
+gh skill install anshulLuhsna/arbityr-skill arbityr --agent claude-code --scope project
+```
+
+GitHub's skill installer also supports other hosts such as GitHub Copilot, Gemini CLI, Windsurf, Warp, Goose, Cline, Amp, and OpenCode-compatible agents.
+
+## Point An Agent At This Repo
+
+Ask your coding agent:
+
+```text
+Install Arbityr for this repo.
+
+Use GitHub Agent Skills if available:
+gh skill install anshulLuhsna/arbityr-skill arbityr --scope project
+
+Pick the right --agent value for the current environment: codex, cursor, claude-code, opencode, or universal.
+
+If gh skill is unavailable, install manually by copying skills/arbityr to the agent's project-local skills directory, preferably .agents/skills/arbityr.
+```
+
 ## Repo Structure
 
 ```text
 arbityr-skill/
-  arbityr/
-    SKILL.md
-    resources/
-      cursor-rule.mdc
+  skills/
+    arbityr/
+      SKILL.md
+      resources/
+        cursor-rule.mdc
   AGENTS.md
   CLAUDE.md
   README.md
@@ -21,35 +72,23 @@ arbityr-skill/
 The core skill is:
 
 ```text
-arbityr/SKILL.md
+skills/arbityr/SKILL.md
 ```
 
 The Cursor rule version is:
 
 ```text
-arbityr/resources/cursor-rule.mdc
+skills/arbityr/resources/cursor-rule.mdc
 ```
 
-## GitHub Skill Install
+## Cursor Native Rule
 
-After the first GitHub skill release is published, install with:
+The recommended Cursor install is still `gh skill install ... --agent cursor`.
 
-```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent claude-code
-```
-
-Use project scope when you want Arbityr only in the current repo, or user scope if you want it globally:
-
-```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent claude-code --scope user
-```
-
-## Cursor Install
-
-For Cursor, copy:
+If you specifically want a Cursor project rule instead, copy:
 
 ```text
-arbityr/resources/cursor-rule.mdc
+skills/arbityr/resources/cursor-rule.mdc
 ```
 
 Into your project as:
@@ -64,37 +103,35 @@ Then open Cursor chat and say:
 Use Arbityr on this decision: [your real decision]
 ```
 
+## Claude, Codex, OpenCode, Or Other Agents
+
+After installation, ask:
+
+```text
+Use Arbityr on this decision: [your real decision]
+```
+
 Or:
 
 ```text
 Before I build this, run Arbityr on the current diff.
 ```
 
-## Claude Or Other Agents
-
-Ask the agent to read:
-
-```text
-arbityr/SKILL.md
-```
-
-Then say:
-
-```text
-Act as Arbityr for this decision: [your real decision]
-```
+Agents with skills support should discover Arbityr from the installed `SKILL.md`. Agents without skill discovery can still read `skills/arbityr/SKILL.md` directly.
 
 ## Publishing
 
-The intended GitHub-native release path is:
+Validate:
 
 ```sh
-gh extension install <publisher>/gh-skill
 gh skill publish --dry-run
-gh skill publish --tag v0.1.0
 ```
 
-After publishing, developers can install the skill with `gh skill install`.
+Publish a release:
+
+```sh
+gh skill publish --tag v0.1.1
+```
 
 ## What To Test
 
@@ -129,9 +166,9 @@ Arbityr runs a short decision session and ends with a decision spec:
 
 ## Discoverability Checklist
 
-- Add GitHub topics: `claude-skills`, `agent-skills`, `ai-skill`, `cursor`.
-- Publish a GitHub skill release after `gh skill publish --dry-run` passes.
-- Submit the repo to relevant public skill catalogs when the package is ready for broader discovery.
+- GitHub topics: `agent-skills`, `ai-skill`, `claude-skills`, `cursor`
+- GitHub skill release: `v0.1.1`
+- Public catalogs: submit after more field usage
 
 ## Privacy
 
