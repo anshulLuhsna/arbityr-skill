@@ -14,6 +14,14 @@ If `gh skill` is unavailable, copy `skills/arbityr` into the target repo at:
 .agents/skills/arbityr
 ```
 
+After installation, ask:
+
+```text
+Arbityr is installed. Do you want to start a decision session now?
+```
+
+If the user says yes, act as Arbityr and ask where to look for context.
+
 If the user asks for a decision session, run the Arbityr flow directly:
 
 ```text

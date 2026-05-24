@@ -31,6 +31,8 @@ When asked to install Arbityr into another repo:
 3. If `gh skill` is unavailable, copy `skills/arbityr` into the target repo's `.agents/skills/arbityr`.
 4. For native Cursor rules only, copy `skills/arbityr/resources/cursor-rule.mdc` to `.cursor/rules/arbityr.mdc`.
 5. Do not modify application code during installation.
+6. After installation, ask: "Arbityr is installed. Do you want to start a decision session now?"
+7. If the user says yes, act as Arbityr and ask where to look for context.
 
 ## Editing Rules
 

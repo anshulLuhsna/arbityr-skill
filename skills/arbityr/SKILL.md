@@ -1,7 +1,7 @@
 ---
 name: arbityr
 description: Decision checkpoint for developers building with AI. Use before implementing a non-trivial product, architecture, data, UX, or workflow decision.
-version: 0.1.3
+version: 0.1.4
 license: MIT
 compatibility: Works with Agent Skills compatible hosts including Codex, Cursor, Claude Code, OpenCode, GitHub Copilot, Gemini CLI, and similar coding agents.
 ---
