@@ -6,29 +6,29 @@ Use it before you ask an AI agent to build something non-trivial, so you can def
 
 ## Install
 
-Arbityr is published as a GitHub Agent Skill:
+Install Arbityr with one command:
 
 ```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope project
+npx skills add anshulLuhsna/arbityr-skill
 ```
 
-Project scope installs Arbityr into the current repo so your agent can discover it there.
+Then ask your agent:
 
-Pin a known release:
-
-```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --pin v0.1.4 --scope project
+```text
+Use Arbityr on this decision: [your real decision]
 ```
 
-Install globally:
+Or:
 
-```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope user
+```text
+Before I build this, run Arbityr on the current diff.
 ```
 
-## Manual Install Without `gh skill`
+The repo includes a root `SKILL.md` so `npx skills add` can install it directly from GitHub.
 
-If GitHub Agent Skills are not available, any coding agent with normal shell access can still install Arbityr from this public repo:
+## Manual Install
+
+If an agent cannot run `npx skills`, it can still clone this public repo and copy the skill:
 
 ```sh
 git clone https://github.com/anshulLuhsna/arbityr-skill.git /tmp/arbityr-skill
@@ -36,24 +36,11 @@ mkdir -p .agents/skills
 cp -R /tmp/arbityr-skill/skills/arbityr .agents/skills/arbityr
 ```
 
-Then ask your agent:
+Then ask:
 
 ```text
 Read .agents/skills/arbityr/SKILL.md and act as Arbityr.
 ```
-
-## Agent-Specific Installs
-
-Use the same skill package and choose the agent host:
-
-```sh
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent codex --scope project
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent cursor --scope project
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent opencode --scope project
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent claude-code --scope project
-```
-
-GitHub's skill installer also supports other hosts such as GitHub Copilot, Gemini CLI, Windsurf, Warp, Goose, Cline, Amp, and OpenCode-compatible agents.
 
 ## Point An Agent At This Repo
 
@@ -62,12 +49,10 @@ Ask your coding agent:
 ```text
 Install Arbityr for this repo.
 
-Use GitHub Agent Skills if available:
-gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope project
+Use the simplest install path:
+npx skills add anshulLuhsna/arbityr-skill
 
-If the current agent is known, replace universal with the right --agent value: codex, cursor, claude-code, or opencode.
-
-If gh skill is unavailable and this repo is not already present, clone it:
+If npx skills is unavailable, clone it:
 git clone https://github.com/anshulLuhsna/arbityr-skill.git /tmp/arbityr-skill
 
 Then install manually:
@@ -86,6 +71,7 @@ If yes, start by asking where to look for context.
 
 ```text
 arbityr-skill/
+  SKILL.md
   skills/
     arbityr/
       SKILL.md
@@ -100,6 +86,12 @@ arbityr-skill/
 The core skill is:
 
 ```text
+SKILL.md
+```
+
+For agents that expect repo-local skill folders, the same skill is mirrored at:
+
+```text
 skills/arbityr/SKILL.md
 ```
 
@@ -111,7 +103,11 @@ skills/arbityr/resources/cursor-rule.mdc
 
 ## Cursor Native Rule
 
-The recommended Cursor install is still `gh skill install ... --agent cursor`.
+The recommended Cursor install is the same one-command path:
+
+```sh
+npx skills add anshulLuhsna/arbityr-skill
+```
 
 If you specifically want a Cursor project rule instead, copy:
 
@@ -131,7 +127,7 @@ Then open Cursor chat and say:
 Use Arbityr on this decision: [your real decision]
 ```
 
-## Claude, Codex, OpenCode, Or Other Agents
+## Claude, Codex, Cursor, OpenCode, Or Other Agents
 
 After installation, ask:
 
@@ -146,20 +142,6 @@ Before I build this, run Arbityr on the current diff.
 ```
 
 Agents with skills support should discover Arbityr from the installed `SKILL.md`. Agents without skill discovery can still read `skills/arbityr/SKILL.md` directly.
-
-## Publishing
-
-Validate:
-
-```sh
-gh skill publish --dry-run
-```
-
-Publish a release:
-
-```sh
-gh skill publish --tag v0.1.4
-```
 
 ## What To Test
 
@@ -196,7 +178,7 @@ Arbityr runs a short decision session and ends with a decision spec:
 ## Discoverability Checklist
 
 - GitHub topics: `agent-skills`, `ai-skill`, `claude-skills`, `cursor`
-- GitHub skill release: `v0.1.4`
+- Install command: `npx skills add anshulLuhsna/arbityr-skill`
 - Public catalogs: submit after more field usage
 
 ## Privacy
