@@ -26,6 +26,22 @@ Install globally:
 gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope user
 ```
 
+## Manual Install Without `gh skill`
+
+If GitHub Agent Skills are not available, any coding agent with normal shell access can still install Arbityr from this public repo:
+
+```sh
+git clone https://github.com/anshulLuhsna/arbityr-skill.git /tmp/arbityr-skill
+mkdir -p .agents/skills
+cp -R /tmp/arbityr-skill/skills/arbityr .agents/skills/arbityr
+```
+
+Then ask your agent:
+
+```text
+Read .agents/skills/arbityr/SKILL.md and act as Arbityr.
+```
+
 ## Agent-Specific Installs
 
 Use the same skill package and choose the agent host:
@@ -51,7 +67,14 @@ gh skill install anshulLuhsna/arbityr-skill arbityr --agent universal --scope pr
 
 If the current agent is known, replace universal with the right --agent value: codex, cursor, claude-code, or opencode.
 
-If gh skill is unavailable, install manually by copying skills/arbityr to the agent's project-local skills directory, preferably .agents/skills/arbityr.
+If gh skill is unavailable and this repo is not already present, clone it:
+git clone https://github.com/anshulLuhsna/arbityr-skill.git /tmp/arbityr-skill
+
+Then install manually:
+mkdir -p .agents/skills
+cp -R /tmp/arbityr-skill/skills/arbityr .agents/skills/arbityr
+
+If this repo is already present, copy skills/arbityr from the repo into .agents/skills/arbityr.
 
 After installation, ask the user:
 "Arbityr is installed. Do you want to start a decision session now?"

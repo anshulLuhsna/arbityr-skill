@@ -14,6 +14,14 @@ If `gh skill` is unavailable, copy `skills/arbityr` into the target repo at:
 .agents/skills/arbityr
 ```
 
+If this repo is not already present, clone it first:
+
+```sh
+git clone https://github.com/anshulLuhsna/arbityr-skill.git /tmp/arbityr-skill
+mkdir -p .agents/skills
+cp -R /tmp/arbityr-skill/skills/arbityr .agents/skills/arbityr
+```
+
 After installation, ask:
 
 ```text
