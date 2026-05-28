@@ -1,6 +1,7 @@
 ---
 
-## name: arbityr\
+## name: arbityr\\
+
 description: Decision checkpoint for developers building with AI. Use before implementing a non-trivial product, architecture, data, UX, or workflow decision.\
 version: 0.2.0\
 license: MIT\
@@ -107,13 +108,19 @@ If relevant context is already visible or provided, continue to the decision typ
 
 ### 1.5. Identify The Decision Type
 
-Once context exists, ask exactly:
+Once context and a decision statement exist, infer the track internally. Do not ask.
+
+- If the decision statement contains words like "whether to add", "should I build", "which approach", "how to structure", "should we use", or describes adding or choosing something new → infer **Feature / Architecture**.
+- If the decision statement contains words like "broken", "not working", "failing", "error", "fix", or describes something that was working and now isn't → infer **Bug Fix**.
+- If genuinely ambiguous (the statement could be either), ask exactly:
 
 ```text
-Is this a bug fix, or a feature / architectural decision?
+Is this tracking down a bug, or a decision about how to build something?
 ```
 
-Then stop. Route internally:
+Then stop.
+
+Route internally based on the inferred or stated track:
 
 - **Bug fix** — the load-bearing assumption in step 4 is about root cause: is this the real failure point, or a symptom?
 - **Feature / Architecture** — the load-bearing assumption in step 4 is about fit: does this approach hold given the codebase, constraints, and goals?
