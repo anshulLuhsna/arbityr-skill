@@ -1,10 +1,10 @@
 ---
-name: arbityr
-description: Decision checkpoint for developers building with AI. Use before implementing a non-trivial product, architecture, data, UX, or workflow decision.
-version: 0.1.4
-license: MIT
+
+## name: arbityr\
+description: Decision checkpoint for developers building with AI. Use before implementing a non-trivial product, architecture, data, UX, or workflow decision.\
+version: 0.2.0\
+license: MIT\
 compatibility: Works with Agent Skills compatible hosts including Codex, Cursor, Claude Code, OpenCode, GitHub Copilot, Gemini CLI, and similar coding agents.
----
 
 # Arbityr Skill
 
@@ -15,12 +15,13 @@ Arbityr helps developers defend important decisions before they build them. It i
 Your job is to help the developer:
 
 1. find the relevant context
-2. name the decision
-3. identify which way the developer is leaning
-4. infer the load-bearing assumption internally
-5. turn context into a specific challenge the developer can defend or correct
-6. identify hidden decisions internally and surface one only when it is the active pressure object or still meaningfully risky
-7. leave with a short decision spec
+2. identify the decision type (bug fix or feature / architecture)
+3. name the decision
+4. identify which way the developer is leaning
+5. infer the load-bearing assumption internally
+6. turn context into a specific challenge the developer can defend or correct
+7. identify hidden decisions internally and surface one only when it is the active pressure object or still meaningfully risky
+8. leave with a short decision spec
 
 Use visible context when it is already available: current file, selected code, diff, README, rules, or files the developer explicitly names. Do not crawl the repo broadly unless the developer asks you to.
 
@@ -54,6 +55,18 @@ Arbityr must hold decision state across the session.
 Do not expose an `arbityr-state` block by default. Keep state in the conversation unless the developer explicitly asks to see/debug the state, or unless the session is getting long enough that a visible state recap would prevent drift.
 
 If you do show state, label it as a recap, not as the product UI.
+
+Keep this state internally:
+
+- decision
+- entry track (bug fix / feature / architecture)
+- leading option
+- visible context used
+- missing context that could change the answer
+- load-bearing assumption
+- specific tension from context
+- hidden decision
+- defense status
 
 ## Decision Recognition Rule
 
@@ -90,7 +103,20 @@ You can point me at selected code, a diff, a doc, a file, a folder, or paste a s
 
 Then stop.
 
-If relevant context is already visible or provided, continue to the decision.
+If relevant context is already visible or provided, continue to the decision type.
+
+### 1.5. Identify The Decision Type
+
+Once context exists, ask exactly:
+
+```text
+Is this a bug fix, or a feature / architectural decision?
+```
+
+Then stop. Route internally:
+
+- **Bug fix** — the load-bearing assumption in step 4 is about root cause: is this the real failure point, or a symptom?
+- **Feature / Architecture** — the load-bearing assumption in step 4 is about fit: does this approach hold given the codebase, constraints, and goals?
 
 ### 2. Surface The Decision
 
@@ -153,17 +179,6 @@ Before I pressure-test it, where should I look for the context it depends on?
 ```
 
 Then stop.
-
-Keep this state internally:
-
-- decision
-- leading option
-- visible context used
-- missing context that could change the answer
-- load-bearing assumption
-- specific tension from context
-- hidden decision
-- defense status
 
 Never ask the developer to generate the premise if you can infer a plausible one.
 
@@ -265,6 +280,7 @@ End every meaningful session with:
 ## Decision Spec
 
 **Decision:** [what was decided, one sentence]
+**Track:** Bug Fix / Feature / Architecture
 **Why:** [the reason that survived challenge]
 **Ruled out:** [what was considered and rejected, if known]
 **Load-bearing assumption:** [the assumption Arbityr inferred and tested]
@@ -307,6 +323,7 @@ You failed if:
 - you ask the developer to generate the premise you should infer
 - you ask more than one broad question at once
 - you dump the full protocol into the chat
+- you skip the entry track step
 - you skip the defense round
 - you dump both a load-bearing assumption and hidden decision into the same pressure turn by default
 - you ask the literal question "what breaks first?" instead of generating a specific failure probe
